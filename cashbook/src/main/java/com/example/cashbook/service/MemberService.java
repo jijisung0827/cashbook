@@ -13,12 +13,16 @@ import com.example.cashbook.vo.Member;
 public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
-	
+	//insert
 	public void insertMember(Member member) {
 		memberMapper.insertMember(member);
 	}
-	
+	//login
 	public LoginMember login(LoginMember loginMember) {
 		return memberMapper.selectLoginMember(loginMember);
+	}
+	//id중복체크
+	public String memberIdCheck(String memberIdCheck) {
+		return memberMapper.seleceMemberId(memberIdCheck); //null 또는 member_id가 리턴됨
 	}
 }

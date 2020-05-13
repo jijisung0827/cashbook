@@ -15,14 +15,24 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script>
+	let clear = function(){
+		$('#idHelper').text("");
+		$('#pwHelper').text("");
+	};
+
 	$(document).ready(function(){
 		$('#btn').click(function(){
 			//유효성 검사 코트 구현
-			/*if(){
-				
+			
+			if($('#memberId').val().length === 0){
+				clear();
+				$('#idHelper').text("아이디를 입력하세요");
+				return;
+			}else if($('#memberPw').val().length === 0){
+				clear();
+				$('#pwHelper').text("비밀번호를 입력하세요");
 				return;
 			}
-			*/
 			$('#loginForm').submit();
 		});
 	});
@@ -34,10 +44,15 @@
 		<div>
 			member_id : 
 			<input type="text" id="memberId" name="memberId">
+			<span id="idHelper"></span>
 		</div>
 		<div>
 			member_pw : 
 			<input type="password" id="memberPw" name="memberPw">
+			<span id="pwHelper"></span>
+		</div>
+		<div>
+			<span th:text="${msg}"></span>
 		</div>
 		<div>
 			<button type="button" id="btn">로그인</button>
