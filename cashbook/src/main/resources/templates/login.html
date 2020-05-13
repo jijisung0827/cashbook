@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -14,15 +14,34 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#btn').click(function(){
+			//유효성 검사 코트 구현
+			/*if(){
+				
+				return;
+			}
+			*/
+			$('#loginForm').submit();
+		});
+	});
+</script>
 </head>
 <body>
-<div class="container">
-	<h1>가계부</h1>
-	
-	<div th:if="${session.loginMember == null}"><a href="/login" class="btn btn-primary">로그인</a></div>
-	<div th:if="${session.loginMember != null}"><a href="/logout" class="btn btn-primary">로그아웃</a></div>
-	
-	<div><a href="/addMember" class="btn btn-primary">회원가입</a></div>
-</div>
+	<h1>로그인</h1>
+	<form method="post" action="/login" id="loginForm">
+		<div>
+			member_id : 
+			<input type="text" id="memberId" name="memberId">
+		</div>
+		<div>
+			member_pw : 
+			<input type="password" id="memberPw" name="memberPw">
+		</div>
+		<div>
+			<button type="button" id="btn">로그인</button>
+		</div>
+	</form>
 </body>
 </html>

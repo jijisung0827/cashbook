@@ -11,7 +11,7 @@
 			member_name,
 			member_addr,
 			member_phone,
-			member_email
+			member_email 
 		)VALUES(
 			#{memberId},
 			#{memberPw},
@@ -21,4 +21,12 @@
 			#{memberEmail}
 		)
 	</insert>
+	<select id="selectLoginMember" parameterType="com.example.cashbook.vo.LoginMember" resultType="com.example.cashbook.vo.LoginMember">
+		SELECT 
+			member_id as memberId,
+			member_pw as memberPw
+		FROM member
+		WHERE member_id = #{memberId}
+		AND member_pw = #{memberPw}
+	</select>
 </mapper>

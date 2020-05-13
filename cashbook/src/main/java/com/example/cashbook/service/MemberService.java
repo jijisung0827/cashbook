@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.cashbook.mapper.MemberMapper;
+import com.example.cashbook.vo.LoginMember;
 import com.example.cashbook.vo.Member;
 
 @Service
@@ -15,5 +16,9 @@ public class MemberService {
 	
 	public void insertMember(Member member) {
 		memberMapper.insertMember(member);
+	}
+	
+	public LoginMember login(LoginMember loginMember) {
+		return memberMapper.selectLoginMember(loginMember);
 	}
 }
