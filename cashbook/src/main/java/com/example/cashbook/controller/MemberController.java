@@ -100,6 +100,31 @@ public class MemberController {
 		model.addAttribute("member", member);
 		return "memberInfo";
 	}
-
+	
+	//member 삭제 form
+	@GetMapping("/removeMember")
+	public String deleteMember(HttpSession session) {
+		//비로그인 상태
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		return "removeMember";
+	}
+	
+	//member 삭제 action
+	@PostMapping("/removeMember")
+	public String deleteMember(HttpSession session, @RequestParam("memberPw") String memberPw) {
+		//비로그인 상태
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		
+		LoginMember loginMember = (LoginMember)(session.getAttribute("loginMember"));
+		loginMember.setMemberPw(memberPw);
+		memberService.deleteMember(loginMember);
+		session.invalidate();
+		
+		return "redirect:/";
+	}
 }
 	

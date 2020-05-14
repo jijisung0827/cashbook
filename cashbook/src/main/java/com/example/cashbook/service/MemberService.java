@@ -5,14 +5,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.cashbook.mapper.MemberMapper;
+import com.example.cashbook.mapper.MemberidMapper;
 import com.example.cashbook.vo.LoginMember;
 import com.example.cashbook.vo.Member;
+import com.example.cashbook.vo.Memberid;
 
 @Service
 @Transactional
 public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
+	@Autowired
+	private MemberidMapper memberidMapper;
 	//insert
 	public void insertMember(Member member) {
 		memberMapper.insertMember(member);
@@ -30,7 +34,11 @@ public class MemberService {
 		return memberMapper.selectMemberOne(loginMember);
 	}
 	//회원삭제
-	public void deleteMember(Member member){
+	public void deleteMember(LoginMember loginmember){
+		Memberid memberid = new Memberid();
+		memberid.setMemberId(loginmember.getMemberId());
+		memberidMapper.insertMemberid(memberid);
 		
+		memberMapper.deleteMember(loginmember);
 	}
 }

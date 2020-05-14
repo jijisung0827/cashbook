@@ -11,5 +11,5 @@ public interface MemberMapper {
 	public String seleceMemberId(String memberIdCheck);
 	public void insertMember(Member member);
 	public LoginMember selectLoginMember(LoginMember loginMember);
-	public void deleteMember(Member member);
+	public void deleteMember(LoginMember loginmember);
 }
