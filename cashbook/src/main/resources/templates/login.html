@@ -21,6 +21,7 @@
 	};
 
 	$(document).ready(function(){
+		
 		$('#btn').click(function(){
 			//유효성 검사 코트 구현
 			
@@ -30,7 +31,7 @@
 				return;
 			}else if($('#memberPw').val().length === 0){
 				clear();
-				$('#pwHelper').text("비밀번호를 입력하세요");
+				$('#pwHelper').text("비밀번호를 입력하세요");  
 				return;
 			}
 			$('#loginForm').submit();

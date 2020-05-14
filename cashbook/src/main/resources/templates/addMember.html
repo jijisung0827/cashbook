@@ -61,8 +61,10 @@ let helperInit = function(){
 		});
 		
 		$('#idBtn').click(function(){
-			if($('#memeberIdCheck').val().length === 0){
-				$('#checkHelper').text("아이디를 입력하세요");
+			if($('#memberIdCheck').val().length < 4){
+				$('#memberIdCheckHelper').text("id 4자이상");
+				$('#memberIdCheck').focus();
+				return;
 			}
 			$('#idForm').submit();	
 	});
@@ -77,7 +79,7 @@ let helperInit = function(){
 			아이디 중복 확인 :
 			<input type="text" name = "memberIdCheck" id = "memberIdCheck"> 
 			<button id="idBtn" type="button">중복체크</button>
-			<span id = "checkHelper"></span>
+			<span id="memberIdCheckHelper"></span>
 			<span th:text="${msg}"></span>
 		</div>
 	</form>

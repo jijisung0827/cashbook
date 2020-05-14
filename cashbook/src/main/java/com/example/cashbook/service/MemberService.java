@@ -25,4 +25,12 @@ public class MemberService {
 	public String memberIdCheck(String memberIdCheck) {
 		return memberMapper.seleceMemberId(memberIdCheck); //null 또는 member_id가 리턴됨
 	}
+	//memberinfo
+	public Member getMemberOne(LoginMember loginMember) {
+		return memberMapper.selectMemberOne(loginMember);
+	}
+	//회원삭제
+	public void deleteMember(Member member){
+		
+	}
 }

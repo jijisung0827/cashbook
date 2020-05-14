@@ -56,7 +56,7 @@ public class MemberController {
 			return "login";
 		}else { //로그인 성공시
 			session.setAttribute("loginMember", returnLoginMember);
-			return "redirect:/";
+			return "redirect:/home";
 		}
 		
 	}
@@ -89,5 +89,17 @@ public class MemberController {
 		}
 		return "addMember";
 	}
+	//member 정보
+	@GetMapping("/memberInfo")
+	public String memberInfo(HttpSession session, Model model) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		Member member = memberService.getMemberOne((LoginMember)(session.getAttribute("loginMember")));
+		System.out.println(member);
+		model.addAttribute("member", member);
+		return "memberInfo";
+	}
+
 }
 	

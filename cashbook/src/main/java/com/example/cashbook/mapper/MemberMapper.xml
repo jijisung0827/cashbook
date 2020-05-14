@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <!-- package에 이름과 xml의 이름을 적어 주소를 부른다 -->
 <mapper namespace="com.example.cashbook.mapper.MemberMapper"> 
+	<!-- 삽입 -->
 	<insert id="insertMember" parameterType="com.example.cashbook.vo.Member">
 		INSERT INTO member(
 			member_id,
@@ -14,21 +15,23 @@
 			member_email 
 		)VALUES(
 			#{memberId},
-			#{memberPw},
+			PASSWORD(#{memberPw}),
 			#{memberName},
 			#{memberAddr},
 			#{memberPhone},
 			#{memberEmail}
 		)
 	</insert>
+	<!-- 로그인 확인 -->
 	<select id="selectLoginMember" parameterType="com.example.cashbook.vo.LoginMember" resultType="com.example.cashbook.vo.LoginMember">
 		SELECT 
 			member_id as memberId,
 			member_pw as memberPw
 		FROM member
 		WHERE member_id = #{memberId}
-		AND member_pw = #{memberPw}
+		AND member_pw = PASSWORD(#{memberPw})
 	</select>
+	<!-- 아이디 중복체크 -->
 	<select id="seleceMemberId" parameterType="String" resultType="String">
 		SELECT
 			member_id
@@ -36,4 +39,21 @@
 		WHERE member_id = #{memberIdCheck}
 		
 	</select>
+	<!-- 회원 정보 보기 -->
+	<select id="selectMemberOne" parameterType="com.example.cashbook.vo.LoginMember" resultType="com.example.cashbook.vo.Member">
+		SELECT
+			member_id as memberId,
+			member_name as memberName,
+			member_addr as memberAddr,
+			member_phone as memberPhone,
+			member_email as memberEmail
+		FROM member
+		WHERE member_id = #{memberId}		
+	</select>
+	<!-- 회원 탈퇴 -->
+	<delete id="deleteMember" parameterType="com.example.cashbook.vo.Member">
+		DELETE
+		FROM member
+		WHERE member_id = #{memberId}
+	</delete>
 </mapper>
