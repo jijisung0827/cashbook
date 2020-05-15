@@ -126,5 +126,46 @@ public class MemberController {
 		
 		return "redirect:/";
 	}
-}
+	//아이디 찾기
+	@GetMapping("/findMemberId")
+	public String findMemberId(HttpSession session) {
+		//로그인상태
+		if(session.getAttribute("loginMember") != null){	
+			return "redirect:/";
+		}
+		return "findMemberId";
+	}
 	
+	@PostMapping("/findMemberId")
+	public String findMemberId(HttpSession session, Model model, Member member) {
+		//로그인상태
+		if(session.getAttribute("loginMember") != null){	
+			return "redirect:/";
+		}
+		String findMemberId = memberService.findMemberId(member);
+		System.out.println(findMemberId+"<----------findMemberId");
+		model.addAttribute("findMemberId",findMemberId);
+		return "memberIdView";
+	}
+	
+	//비밀번호 찾기
+	@GetMapping("/findMemberPw")
+	public String findMemberPw(HttpSession session) {
+		//로그인상태
+		if(session.getAttribute("loginMember") != null){	
+			return "redirect:/";
+		}
+		return "findMemberPw";
+	}
+	@PostMapping("/findMemberPw")
+	public String findMemberPw(HttpSession session, Model model, Member member) {
+		int row = memberService.updateMemberPw(member);
+		String msg = "아이디와 메일을 확인하세요";
+		if(row ==1) {
+			msg = "비밀번호를 입력한 메일로 전송하였습니다";
+		} 
+		model.addAttribute("msg", msg);
+		return "memberPwView";
+	}
+}
+

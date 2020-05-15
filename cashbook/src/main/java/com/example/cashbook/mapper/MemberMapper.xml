@@ -46,7 +46,8 @@
 			member_name as memberName,
 			member_addr as memberAddr,
 			member_phone as memberPhone,
-			member_email as memberEmail
+			member_email as memberEmail,
+			member_pic as memberPic
 		FROM member
 		WHERE member_id = #{memberId}		
 	</select>
@@ -57,4 +58,27 @@
 		WHERE member_id = #{memberId}
 		AND member_pw = #{memberPw}
 	</delete>
+	<!-- 아이디 찾기 -->
+	<select id="findMemberId" parameterType="com.example.cashbook.vo.Member" resultType="String">
+		SELECT
+			CONCAT(SUBSTRING(member_id,1,3), '****')
+		FROM member
+		WHERE member_name = #{memberName}
+		AND member_phone = #{memberPhone}
+		AND member_email = #{memberEmail}
+	</select>
+	<!-- 비밀번호 찾기 
+	1. 사용자가 입력한 id와 이메일이 일치하면 pw변경(랜덤문자열) update
+	2. pw를 메일로 전송-->
+	<update id="updateMemberPw" parameterType="com.example.cashbook.vo.Member">
+		UPDATE member
+		SET	member_pw = PASSWORD(#{memberPw})
+		WHERE member_id = #{memberId}
+		AND member_email = #{memberEmail}
+	
+	</update>
+	
+	
+	
+	
 </mapper>
