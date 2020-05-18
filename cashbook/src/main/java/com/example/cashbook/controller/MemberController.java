@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.cashbook.service.MemberService;
 import com.example.cashbook.vo.LoginMember;
 import com.example.cashbook.vo.Member;
+import com.example.cashbook.vo.MemberForm;
 
 @Controller
 public class MemberController {
@@ -29,12 +30,13 @@ public class MemberController {
 	}
 	//addMember action
 	@PostMapping("/addMember")
-	public String addMember(Member member, HttpSession session) { 
+	public String addMember(MemberForm memberForm, HttpSession session) { 
 		//로그인상태
 		if(session.getAttribute("loginMember") != null){	
 			return "redirect:/";
 		}
-		memberService.insertMember(member);
+		
+		memberService.insertMember(memberForm);
 		return "redirect:/index";
 	}
 	
@@ -113,7 +115,7 @@ public class MemberController {
 	
 	//member 삭제 action
 	@PostMapping("/removeMember")
-	public String deleteMember(HttpSession session, @RequestParam("memberPw") String memberPw) {
+	public String deleteMember(HttpSession session, @RequestParam("memberPw") String memberPw, Model model) {
 		//비로그인 상태
 		if(session.getAttribute("loginMember") == null) {
 			return "redirect:/";
@@ -121,10 +123,16 @@ public class MemberController {
 		
 		LoginMember loginMember = (LoginMember)(session.getAttribute("loginMember"));
 		loginMember.setMemberPw(memberPw);
-		memberService.deleteMember(loginMember);
-		session.invalidate();
+		int result = memberService.deleteMember(loginMember);
+	
+		if(result == 1) {
+			session.invalidate();
+			return "redirect:/";
+		}
+		model.addAttribute("msg", "비밀번호가 틀립니다");
 		
-		return "redirect:/";
+		return "removeMember";
+		
 	}
 	//아이디 찾기
 	@GetMapping("/findMemberId")

@@ -23,9 +23,6 @@
 			if($('#memberPw').val().length === 0){
 				$('#pwHelper').text("비밀번호를 입력해주세요");
 				return;
-			} else if($('#memberPw').val() != session){
-				$('#pwHelper').text("비밀번호가 틀립니다");
-				return;
 			}
 			$('#deleteForm').submit();
 		});
@@ -39,6 +36,7 @@
 		<div>
 			비밀번호 : 
 			<input type="password" name = "memberPw" id="memberPw">
+			<span th:text="${msg}"></span>
 			<span id="pwHelper"></span>
 		</div>	
 		<div>

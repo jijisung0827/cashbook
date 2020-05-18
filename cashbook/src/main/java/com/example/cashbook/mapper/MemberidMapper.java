@@ -6,5 +6,5 @@ import com.example.cashbook.vo.Memberid;
 
 @Mapper
 public interface MemberidMapper {
-	void insertMemberid(Memberid memberid);
+	int insertMemberid(Memberid memberid);
 }

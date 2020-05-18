@@ -12,14 +12,16 @@
 			member_name,
 			member_addr,
 			member_phone,
-			member_email 
+			member_email,
+			member_pic
 		)VALUES(
 			#{memberId},
 			PASSWORD(#{memberPw}),
 			#{memberName},
 			#{memberAddr},
 			#{memberPhone},
-			#{memberEmail}
+			#{memberEmail},
+			#{memberPic}
 		)
 	</insert>
 	<!-- 로그인 확인 -->
@@ -56,7 +58,7 @@
 		DELETE
 		FROM member
 		WHERE member_id = #{memberId}
-		AND member_pw = #{memberPw}
+		AND member_pw = PASSWORD(#{memberPw})
 	</delete>
 	<!-- 아이디 찾기 -->
 	<select id="findMemberId" parameterType="com.example.cashbook.vo.Member" resultType="String">

@@ -8,7 +8,7 @@
 		INSERT INTO memberid(
 			member_id
 		)VALUE(
-			#{memberid}
+			#{memberId}
 		)
 	</insert>
 </mapper>

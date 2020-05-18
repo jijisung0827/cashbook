@@ -9,9 +9,9 @@ import com.example.cashbook.vo.Member;
 public interface MemberMapper {
 	public Member selectMemberOne(LoginMember loginMember);
 	public String seleceMemberId(String memberIdCheck);
-	public void insertMember(Member member);
+	public int insertMember(Member member);
 	public LoginMember selectLoginMember(LoginMember loginMember);
-	public void deleteMember(LoginMember loginmember);
+	public int deleteMember(LoginMember loginmember);
 	public String findMemberId(Member member);
 	public int updateMemberPw(Member member);
 }
