@@ -35,7 +35,12 @@ public class MemberController {
 		if(session.getAttribute("loginMember") != null){	
 			return "redirect:/";
 		}
-		
+		// 파일 .jpg .png .gif 만 업로드 가능
+		if(memberForm.getMemberPic() != null) {
+			if(!memberForm.getMemberPic().getContentType().equals("image/jpg") && !memberForm.getMemberPic().getContentType().equals("image/png") && !memberForm.getMemberPic().getContentType().equals("image/gif") && !memberForm.getMemberPic().getContentType().equals("image/jpeg")) {
+				return "redirect:/addMember";
+			}
+		}
 		memberService.insertMember(memberForm);
 		return "redirect:/index";
 	}
@@ -98,7 +103,7 @@ public class MemberController {
 			return "redirect:/";
 		}
 		Member member = memberService.getMemberOne((LoginMember)(session.getAttribute("loginMember")));
-		System.out.println(member);
+		//System.out.println(member);
 		model.addAttribute("member", member);
 		return "memberInfo";
 	}
@@ -151,7 +156,7 @@ public class MemberController {
 			return "redirect:/";
 		}
 		String findMemberId = memberService.findMemberId(member);
-		System.out.println(findMemberId+"<----------findMemberId");
+		//System.out.println(findMemberId+"<----------findMemberId");
 		model.addAttribute("findMemberId",findMemberId);
 		return "memberIdView";
 	}
@@ -174,6 +179,34 @@ public class MemberController {
 		} 
 		model.addAttribute("msg", msg);
 		return "memberPwView";
+	}
+	// modifyMember 회원 수정 form
+	@GetMapping("/modifyMember")
+	public String updateMemberInfo(HttpSession session, Model model) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		Member member = memberService.getMemberOne((LoginMember)(session.getAttribute("loginMember")));
+		//System.out.println(member);
+		model.addAttribute("member", member);
+		return "modifyMember";
+	}
+	// modifyMember 회원 수정 action
+	@PostMapping("/modifyMember")
+	public String updateMemberInfoAction(HttpSession session, MemberForm memberForm) {
+		//if(session.getAttribute("loginMember") != null){	
+		//	return "redirect:/";
+		//}
+		// 파일 .jpg .png .gif 만 업로드 가능
+		if(memberForm.getMemberPic() != null) {
+			if(!memberForm.getMemberPic().getContentType().equals("image/jpg") && !memberForm.getMemberPic().getContentType().equals("image/png") && !memberForm.getMemberPic().getContentType().equals("image/gif") && !memberForm.getMemberPic().getContentType().equals("image/jpeg")) {
+				return "redirect:/modifyMember";
+			}
+		}
+		System.out.println(memberForm+"<--------------------------- modifyMemberInfo Action");
+		memberService.updateMember(memberForm);
+		System.out.println(memberForm+"<--------------------------- modifyMemberInfo Action");
+		return "redirect:/memberInfo";
 	}
 }
 

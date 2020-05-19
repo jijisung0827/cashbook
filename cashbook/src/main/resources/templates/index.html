@@ -18,7 +18,6 @@
 <body>
 <div class="container">
 	<h1>가계부</h1>
-	
 	<div th:if="${session.loginMember == null}"><a href="/login" class="btn btn-primary">로그인</a></div>
 	<div th:if="${session.loginMember != null}"><a href="/logout" class="btn btn-primary">로그아웃</a></div>
 	

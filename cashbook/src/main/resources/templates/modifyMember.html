@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$('#btn').click(function(){
+			if($('#memberPw').val() != $('#memberPw2').val()){
+				$('#pwHelper').text("pw를 확인하세요");
+				$('#memberPw').focus();
+				return;
+			}
+			$('#myform').submit();
+		});
+	});
+</script>
+</head>
+<body>
+	<div class="container">
+	<h1>회원 정보수정</h1>
+	<div th:include="/include/menu::sidemenu"></div> 
+		<form method="post" action="/modifyMember" enctype="multipart/form-data" id="myform">
+			<div>
+				사진 : 
+				<img th:src="@{'/upload/'+ ${member.memberPic}}" width="200" height="200"></img>
+				<input type="file" name="memberPic" id="memberPic">	
+			</div>
+			<div>
+	  			아이디 : 
+				<input type="text" name = "memberId" th:value="${member.memberId}" readonly>
+			</div>
+			<div>
+				사용자 이름 : 
+				<input type="text" name = "memberName" id = "memberName" th:value="${member.memberName}" readonly>
+			</div>
+			<div>
+				주소 : 
+				<input type="text" name = "memberAddr" id = "memberAddr" th:value="${member.memberAddr}">
+			</div>
+			<div>
+				전화번호 : 
+				<input type="text" name = "memberPhone" id = "memberPhone" th:value="${member.memberPhone}">
+			</div>
+			<div>
+				이메일 : 
+				<input type="text" name = "memberEmail" id = "memberEmail" th:value="${member.memberEmail}">
+			</div>
+			<div>
+				비밀번호 : 
+				<input type="password" name = "memberPw" id = "memberPw">
+				<span id="pwHelper"></span>
+			</div>
+			<div>
+				비밀번호 확인 : 
+				<input type="password" id = "memberPw2">
+			</div>
+			<div>
+				<button type="button" id="btn">수정</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

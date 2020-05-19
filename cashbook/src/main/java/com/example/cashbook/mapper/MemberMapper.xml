@@ -79,8 +79,22 @@
 		AND member_email = #{memberEmail}
 	
 	</update>
-	
-	
+	<!-- pic 이름 찾기 -->
+	<select id="selectMemberPic" parameterType="String" resultType="String">
+		SELECT member_pic
+		FROM member
+		WHERE member_id = #{memberId}
+	</select>
+	<!-- 회원정보 수정 -->
+	<update id="updateMemberInfo" parameterType="String">
+		UPDATE member
+		SET member_addr = #{memberAddr},
+			member_phone = #{memberPhone},
+			member_email = #{memberEmail}
+		WHERE member_id = #{memberId}
+		AND member_pw = PASSWORD(#{memberPw})
+		AND member_name = #{memberName}
+	</update>
 	
 	
 </mapper>
