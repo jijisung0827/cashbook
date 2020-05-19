@@ -21,9 +21,24 @@
    </select>
    
    <!-- delete Cash -->
-   <delete id="deleteCash" parameterType="Integer">
+   <delete id="deleteCash" parameterType="int">
    	DELETE
    	FROM cash
    	WHERE cash_no = #{cashNo}
    </delete>
+   
+   <!-- 합계 -->
+   <select id="selectCashKindSum" parameterType="com.example.cashbook.vo.Cash" resultType="int">
+   		SELECT
+         (SELECT 
+            IFNULL(SUM(cash_price), 0) 
+         FROM cash
+         WHERE member_id = #{memberId} AND cash_kind = '수입' AND cash_date = #{cashDate})
+         -
+         (SELECT 
+            IFNULL(SUM(cash_price), 0)
+         FROM cash
+         WHERE member_id = #{memberId} AND cash_kind = '지출' AND cash_date = #{cashDate})
+      FROM dual
+   </select>
 </mapper>

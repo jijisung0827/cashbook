@@ -11,5 +11,6 @@ public interface CashMapper {
    //로그인 사용자의 오늘날짜 Cash 목록      
    public List<Cash> selectCashListByDate(Cash cash);
    public void deleteCash(int cashNo);
+   public int selectCashKindSum(Cash cash);
    
 }

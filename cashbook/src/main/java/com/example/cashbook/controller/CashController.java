@@ -1,10 +1,8 @@
 package com.example.cashbook.controller;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.cashbook.service.CashService;
@@ -36,7 +35,6 @@ public class CashController {
 		}
 		//아이디
 		String loginMemberId = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
-		
 		//오늘날짜구하기
 		//Date date = new Date();
 		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -44,12 +42,24 @@ public class CashController {
 		
 		Cash cash = new Cash();
 		cash.setMemberId(loginMemberId);
-		cash.setCashDate(day);
+		cash.setCashDate(day.toString());
 		
-		List<Cash> cashList = cashService.selectCash(cash);
-		model.addAttribute("cashList",cashList);
+		Map<String, Object> map = cashService.selectCash(cash);
+		model.addAttribute("cashList", map.get("cashList"));
+		model.addAttribute("cashKindSum", map.get("cashKindSum"));
 		model.addAttribute("day", day);
 		
 		return "cashList";
+	}
+	
+	//delete Cash
+	@GetMapping("/deleteCash")
+	public String delectCash(HttpSession session, @RequestParam("cashNo") int cashNo) {
+		if(session.getAttribute("loginMember") == null) {
+			return "redirect:/";
+		}
+		cashService.delectCash(cashNo);
+		
+		return "redirect:/cashList";
 	}
 }

@@ -1,6 +1,5 @@
 package com.example.cashbook.vo;
 
-import java.time.LocalDate;
 
 public class Cash {
 	private int cashNo;
@@ -10,7 +9,7 @@ public class Cash {
 	private int cashPrice;
 	private String cashPlace;
 	private String cashMemo;
-	private LocalDate cashDate;
+	private String cashDate;
 	public int getCashNo() {
 		return cashNo;
 	}
@@ -53,10 +52,10 @@ public class Cash {
 	public void setCashMemo(String cashMemo) {
 		this.cashMemo = cashMemo;
 	}
-	public LocalDate getCashDate() {
+	public String getCashDate() {
 		return cashDate;
 	}
-	public void setCashDate(LocalDate cashDate) {
+	public void setCashDate(String cashDate) {
 		this.cashDate = cashDate;
 	}
 	@Override
@@ -65,4 +64,5 @@ public class Cash {
 				+ categoryName + ", cashPrice=" + cashPrice + ", cashPlace=" + cashPlace + ", cashMemo=" + cashMemo
 				+ ", cashDate=" + cashDate + "]";
 	}
+	
 }
