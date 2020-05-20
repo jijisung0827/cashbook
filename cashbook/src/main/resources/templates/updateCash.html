@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container">
+	<h1>가계부 정보수정</h1>
+	<div th:include="/include/menu::sidemenu"></div>
+		<form method="post" action="/updateCash" id="myform">
+			<div>
+				member_id :
+				<input type="text" name="memberId" id="memberId" th:value="${memberId}">
+			</div>
+			<div>
+				cash_kind :
+				<input type="radio" name="cashKind" id="cashKind" th:value="${cash.cashKind}">지출
+				<input type="radio" name="cashKind" id="cashKind" th:value="${cash.cashKind}">수입
+			</div>
+			<div>
+				category_name : wait
+				<select name="categoryName" id = "categoryName" th:each="ca : ${cash.categoryName}">
+					<option value="">카테고리 선택</option>
+					<option th:value="${ca.categoryName}">${ca.categoryName}</option>
+				</select>
+			</div>
+			<div>
+				cash_price :
+				<input type="text" name="cashPrice" id="cashPrice" th:value="${cash.cashPrice}">
+			</div>
+			<div>
+				cash_place :
+				<input type="text" name="cashPlace" id="cashPlace" th:value="${cash.cashPlace}">
+			</div>
+			<div>
+				cash_date :
+				<input type="text" name="cashDate" id="cashDate" th:value="${day}">
+			</div>
+			<div>
+				cash_memo :
+				<input type="text" name="cashMemo" id="cashMemo" th:value="${cash.cashMemo}">
+			</div>
+			<div>
+				<button type="button" id="btn">수정</button>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

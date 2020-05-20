@@ -53,4 +53,33 @@
    		AND MONTH(cash_date) = #{month}
    		GROUP BY DAY(cash_date)
    </select>
+   
+   <!-- 일별 가계부 수정 폼 -->
+   <select id="selectCashListOne"
+         parameterType="com.example.cashbook.vo.Cash"
+         resultType="com.example.cashbook.vo.Cash">
+      SELECT
+         cash_no as cashNo,
+         cash_kind as cashKind,
+         category_name as categoryName,
+         cash_price as cashPrice,
+         cash_place as cashPlace,
+         cash_memo as cashMemo
+      FROM  cash 
+      WHERE member_id = #{memberId}
+      AND cash_date = #{cashDate}            
+      AND cash_no = #{cashNo}
+   </select>
+   
+   <!-- 일별 가계부 수정 액션-->
+   <update id="updateCash" parameterType="com.example.cashbook.vo.Cash">
+   		UPDATE cash
+   		SET member_id = #{memberId},
+   			cash_kind = #{cashKind},
+   			category_name = #{categoryName},
+   			cash_price = #{cashPrice},
+   			cash_place = #{cashPlace},
+   			cash_date = #{cashDate}
+   		WHERE cash_no = #{cashNo}
+   </update>
 </mapper>

@@ -104,5 +104,32 @@ public class CashController {
 		
 		return "cashListMonth";
 	}
-
+	
+	//일별 수입 지출 수정 폼
+	@GetMapping("/updateCash")
+	public String updateListForm(HttpSession session,Model model, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate day,
+								@RequestParam("cashNo") int cashNo) {
+		
+		if(day == null) {
+			day = LocalDate.now();
+		}
+		
+		if(session.getAttribute("loginMember") == null){	
+			return "redirect:/";
+		}
+		
+		String loginMemberId = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		
+		
+		Cash cash = new Cash();
+		cash.setCashNo(cashNo);
+		cash.setMemberId(loginMemberId);
+		cash.setCashDate(day.toString());
+		
+		cash = cashService.selectCashListOne(cash);
+		model.addAttribute("cash", cash);
+		model.addAttribute("memberId", loginMemberId);
+		model.addAttribute("day", day.toString());
+		return "updateCash";
+	}
 }

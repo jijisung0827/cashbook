@@ -15,4 +15,5 @@ public interface CashMapper {
    public void deleteCash(int cashNo);
    public int selectCashKindSum(Cash cash);
    public List<DayAndPrice> selectDayAndPrice(Map<String, Object> map);
+   public Cash selectCashListOne(Cash cash);
 }

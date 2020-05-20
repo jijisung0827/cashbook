@@ -43,4 +43,10 @@ public class CashService {
 		
 		return cashMapper.selectDayAndPrice(map);
 	}
+	
+	//day List Update
+	
+	public Cash selectCashListOne(Cash cash) {
+		return cashMapper.selectCashListOne(cash);
+	}
 }
