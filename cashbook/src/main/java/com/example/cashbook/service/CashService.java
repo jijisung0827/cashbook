@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.cashbook.mapper.CashMapper;
 import com.example.cashbook.vo.Cash;
+import com.example.cashbook.vo.DayAndPrice;
 
 @Service
 @Transactional
@@ -29,5 +30,17 @@ public class CashService {
 	//delete Cash
 	public void delectCash(int cashNo) {
 		cashMapper.deleteCash(cashNo);
+	}
+	
+	//month sum
+	public List<DayAndPrice> getCashAndPriceList(String memberId, int year, int month){
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("year", year);
+		map.put("month", month);
+		
+		
+		return cashMapper.selectDayAndPrice(map);
 	}
 }

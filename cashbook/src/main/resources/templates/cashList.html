@@ -20,6 +20,7 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<h1>일별 가계부 관리</h1>
    <!-- /include폴더안에 있는 menu 파일 중에  th:fragment="sidemenu"인 div단위 내용 가져옴  -->
    <div th:include="/include/menu::sidemenu"></div>
    <!--<jsp:include page=""> -->
@@ -52,7 +53,7 @@
                <td th:if="${cash.cashKind} == '수입'"
                   th:text="${'+'+ cash.cashPrice}"></td>
                <td th:unless="${cash.cashKind} == '수입'"></td>
-
+				
                <!-- 타임리프 if~else문 : if/unless  -->
                <td th:if="${cash.cashKind} =='지출'"
                   th:text="${'-'+ cash.cashPrice}"></td>

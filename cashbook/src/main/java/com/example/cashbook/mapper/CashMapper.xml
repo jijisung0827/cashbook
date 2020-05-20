@@ -27,7 +27,7 @@
    	WHERE cash_no = #{cashNo}
    </delete>
    
-   <!-- 합계 -->
+   <!-- 일별 합계 -->
    <select id="selectCashKindSum" parameterType="com.example.cashbook.vo.Cash" resultType="int">
    		SELECT
          (SELECT 
@@ -40,5 +40,17 @@
          FROM cash
          WHERE member_id = #{memberId} AND cash_kind = '지출' AND cash_date = #{cashDate})
       FROM dual
+   </select>
+   
+   <!-- 월별 합계 -->
+   <select id="selectDayAndPrice" parameterType="java.util.Map" resultType="com.example.cashbook.vo.DayAndPrice">
+   		SELECT DAY(cash_date) as day, 
+   			   SUM(CASE WHEN cash_kind='수입' THEN cash_price
+   			   	   WHEN cash_kind='지출' THEN -cash_price END) as price
+   		FROM cash
+   		WHERE member_id = #{memberId}
+   		AND YEAR(cash_date) = #{year}
+   		AND MONTH(cash_date) = #{month}
+   		GROUP BY DAY(cash_date)
    </select>
 </mapper>
