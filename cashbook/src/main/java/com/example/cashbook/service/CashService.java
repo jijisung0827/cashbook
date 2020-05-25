@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.cashbook.mapper.CashMapper;
 import com.example.cashbook.vo.Cash;
+import com.example.cashbook.vo.Category;
 import com.example.cashbook.vo.DayAndPrice;
 
 @Service
@@ -48,5 +49,15 @@ public class CashService {
 	
 	public Cash selectCashListOne(Cash cash) {
 		return cashMapper.selectCashListOne(cash);
+	}
+	
+	//update cash
+	public void updateCash(Cash cash){
+		cashMapper.updateCash(cash);
+	}
+	//select category
+	
+	public List<Category> selectCategoryName() {
+		return cashMapper.selectCategoryName();
 	}
 }

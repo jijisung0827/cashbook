@@ -16,20 +16,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div class="container">
-	<h1>가계부 정보수정</h1>
+	<h1>가계부 추가</h1>
 	<div th:include="/include/menu::sidemenu"></div>
-		<form method="post" action="/updateCash" id="myform">
-			<div>
-				member_id :
-				<input type="text" name="memberId" id="memberId" th:value="${memberId}">
-			</div>
-			<div>
-				cash_kind :
-				<input type="radio" name="cashKind" id="cashKind" th:value="${cash.cashKind}">지출
-				<input type="radio" name="cashKind" id="cashKind" th:value="${cash.cashKind}">수입
-			</div>
-			<div>
+   <!--<jsp:include page=""> -->
+   <div align="center">
+   		<form method="post" action="/insertCashList">
+   			<div>
 				category_name : 
 				<select name="categoryName" id = "categoryName">
 					<option value="">카테고리 선택</option>
@@ -37,26 +29,26 @@
 				</select>
 			</div>
 			<div>
+				cash_kind :
+				<input type="radio" name="cashKind" id="cashKind" value="지출">지출
+				<input type="radio" name="cashKind" id="cashKind" value="수입">수입
+			</div>
+			<div>
 				cash_price :
-				<input type="text" name="cashPrice" id="cashPrice" th:value="${cash.cashPrice}">
+				<input type="text" name="cashPrice" id="cashPrice">
 			</div>
 			<div>
 				cash_place :
-				<input type="text" name="cashPlace" id="cashPlace" th:value="${cash.cashPlace}">
-			</div>
-			<div>
-				cash_date :
-				<input type="text" name="cashDate" id="cashDate" th:value="${day}">
+				<input type="text" name="cashPlace" id="cashPlace">
 			</div>
 			<div>
 				cash_memo :
-				<input type="text" name="cashMemo" id="cashMemo" th:value="${cash.cashMemo}">
+				<input type="text" name="cashMemo" id="cashMemo">
 			</div>
-				<input type="hidden" name="cashNo" id="cashNo" th:value="${cash.cashNo}">
 			<div>
 				<button type="submit" id="btn">수정</button>
 			</div>
-		</form>
-	</div>
+   		</form>
+   </div>
 </body>
 </html>

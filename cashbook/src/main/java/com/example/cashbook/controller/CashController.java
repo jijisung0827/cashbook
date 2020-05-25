@@ -2,7 +2,6 @@ package com.example.cashbook.controller;
 
 import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,10 +12,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.cashbook.service.CashService;
 import com.example.cashbook.vo.Cash;
+import com.example.cashbook.vo.Category;
 import com.example.cashbook.vo.DayAndPrice;
 import com.example.cashbook.vo.LoginMember;
 
@@ -108,7 +109,7 @@ public class CashController {
 	//일별 수입 지출 수정 폼
 	@GetMapping("/updateCash")
 	public String updateListForm(HttpSession session,Model model, @RequestParam(value="day", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDate day,
-								@RequestParam("cashNo") int cashNo) {
+								@RequestParam("cashNo") int cashNo, @RequestParam("date") String date) {
 		
 		if(day == null) {
 			day = LocalDate.now();
@@ -120,16 +121,48 @@ public class CashController {
 		
 		String loginMemberId = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
 		
+		List<Category> category = cashService.selectCategoryName();
 		
 		Cash cash = new Cash();
 		cash.setCashNo(cashNo);
 		cash.setMemberId(loginMemberId);
-		cash.setCashDate(day.toString());
+		cash.setCashDate(date);
 		
 		cash = cashService.selectCashListOne(cash);
+		model.addAttribute("category", category);
 		model.addAttribute("cash", cash);
 		model.addAttribute("memberId", loginMemberId);
-		model.addAttribute("day", day.toString());
+		model.addAttribute("day", date);
 		return "updateCash";
 	}
+	
+	//일별 수입 지줄 수정 액션
+	@PostMapping("/updateCash")
+	public String updateListAction(HttpSession session, Cash cash) {
+		
+		if(session.getAttribute("loginMember") == null){	
+			return "redirect:/";
+		}
+		System.out.println(cash+"<--------------------------UpdateCash");
+		cashService.updateCash(cash);
+		
+		return "redirect:/cashList";
+	}
+	
+	//일별 수입 지출 삽입 폼
+	@GetMapping("/insertCashList")
+	public String insertCashListForm(HttpSession session,Model model) {
+		
+		if(session.getAttribute("loginMember") == null){	
+			return "redirect:/";
+		}
+		List<Category> category = cashService.selectCategoryName();
+		
+		model.addAttribute("category", category);
+		
+		return "insertCashList";
+	}
+	
+	
+	
 }

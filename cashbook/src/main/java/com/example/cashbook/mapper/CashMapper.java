@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.cashbook.vo.Cash;
+import com.example.cashbook.vo.Category;
 import com.example.cashbook.vo.DayAndPrice;
 
 @Mapper
@@ -16,4 +17,6 @@ public interface CashMapper {
    public int selectCashKindSum(Cash cash);
    public List<DayAndPrice> selectDayAndPrice(Map<String, Object> map);
    public Cash selectCashListOne(Cash cash);
+   public List<Category> selectCategoryName();
+   public void updateCash(Cash cash);
 }

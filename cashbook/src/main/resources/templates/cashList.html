@@ -62,12 +62,14 @@
                <td th:text="${cash.cashPlace}"></td>
                <td th:text="${cash.cashMemo}"></td>
                <td><a th:href="@{/deleteCash(cashNo=${cash.cashNo})}">삭제</a></td>
-               <td><a th:href="@{/updateCash(cashNo=${cash.cashNo})}">수정</a></td>
+               <td><a th:href="@{/updateCash(cashNo=${cash.cashNo},date=${day.toString()})}">수정</a></td>
             </tr>
          </tbody>
       </table>
       <div>(수입+지출)합계 : <span th:text="${cashKindSum}"></span></div>
-      <button type="button">입력</button>
+      	<form method="post" action="/insertCashList">
+      		<button type="submit">입력</button>
+      	</form>
    </div>
 </body>
 </html>

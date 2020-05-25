@@ -82,4 +82,11 @@
    			cash_date = #{cashDate}
    		WHERE cash_no = #{cashNo}
    </update>
+   
+   <!-- 카테고리 리스트 -->
+   <select id="selectCategoryName" parameterType="com.example.cashbook.vo.Category" resultType="com.example.cashbook.vo.Category">
+		   SELECT 
+		   		category_name as categoryName
+		   FROM category
+   </select>
 </mapper>
