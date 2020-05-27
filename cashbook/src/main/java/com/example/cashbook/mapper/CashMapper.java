@@ -19,4 +19,6 @@ public interface CashMapper {
    public Cash selectCashListOne(Cash cash);
    public List<Category> selectCategoryName();
    public void updateCash(Cash cash);
+   public void insertCashList(Cash cash);
+   public DayAndPrice selectDayAndPriceSum(Map<String, Object> map);
 }

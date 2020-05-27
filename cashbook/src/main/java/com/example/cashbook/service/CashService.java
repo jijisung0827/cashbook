@@ -45,6 +45,15 @@ public class CashService {
 		return cashMapper.selectDayAndPrice(map);
 	}
 	
+	//month price sum
+	public DayAndPrice getCashApnPriceSum(String memberId, int month) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("month", month);
+		
+		return cashMapper.selectDayAndPriceSum(map);
+	}
+	
 	//day List Update
 	
 	public Cash selectCashListOne(Cash cash) {
@@ -59,5 +68,10 @@ public class CashService {
 	
 	public List<Category> selectCategoryName() {
 		return cashMapper.selectCategoryName();
+	}
+	
+	//insert cash
+	public void insertCashList(Cash cash) {
+		cashMapper.insertCashList(cash);
 	}
 }

@@ -28,6 +28,9 @@
 	span.gd-red{
 		color: red;
 	}
+	div.gd-down{
+		float: rigth;
+	}
 </style>
 
 <!-- Latest compiled and minified CSS -->
@@ -43,14 +46,16 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div th:include="/include/menu::sidemenu"></div>
 <div class="container">
 	<h1>월별 가계부 관리</h1>
-	<div th:include="/include/menu::sidemenu"></div>
 	
 	<h3 th:text="${cDay}+월"></h3>
+	<h3 th:if="${priceSum.price} >0" th:text="'합계 : +'+${priceSum.price}"></h3>
+	<h3 th:unless="${priceSum.price} >0" th:text="'합계 : '+${priceSum.price}"></h3>
 	<div>
-         <a th:href="@{/cashListMonth(day=${day.plusMonths(-1)})}">이전</a>
-         <a th:href="@{/cashListMonth(day=${day.plusMonths(+1)})}">다음</a>
+         <a th:href="@{/cashListMonth(day=${day.plusMonths(-1)})}" class="btn btn-primary">이전</a>
+         <a th:href="@{/cashListMonth(day=${day.plusMonths(+1)})}" class="btn btn-primary">다음</a>
     </div>
 	<div class="gd-left gd-clear gd-title">일</div>
 	<div class="gd-left gd-title">월</div>
@@ -66,16 +71,16 @@
 			 <div th:each="dp : ${list}">
 			 	<span th:if="${dp.day}== ${i-(firstDay-1)}" >
 			 		<span th:if="${dp.price}>=0">
-			 			<span th:text="'수입 : '"></span>
+			 			<span th:text="'수입 :+'"></span>
 			 			<span th:class="gd-blue" th:text="${dp.price}+'원'"></span>
 			 		</span>
 			 		<span th:unless="${dp.price}>=0">
-			 			<span th:text="'지출 : '"></span>
+			 			<span th:text="'지출 :'"></span>
 			 			<span th:class="gd-red" th:text="${dp.price}+'원'"></span>
 			 		</span>		
 			 	</span>
 			 	</div>
 			 </div>
-</div>	
+</div>
 </body>
 </html>

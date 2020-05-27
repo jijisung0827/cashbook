@@ -20,16 +20,17 @@
    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h1>일별 가계부 관리</h1>
+	
    <!-- /include폴더안에 있는 menu 파일 중에  th:fragment="sidemenu"인 div단위 내용 가져옴  -->
    <div th:include="/include/menu::sidemenu"></div>
    <!--<jsp:include page=""> -->
    <div align="center">
+   	<h1>일별 가계부 관리</h1>
       <h1>2020년 가계부</h1>
       <h2 th:text="${day}"></h2>
       <div>
-         <a th:href="@{/cashList(day=${day.plusDays(-1)})}">이전</a>
-         <a th:href="@{/cashList(day=${day.plusDays(+1)})}">다음</a>
+         <a th:href="@{/cashList(day=${day.plusDays(-1)})}" class="btn btn-primary">이전</a>
+         <a th:href="@{/cashList(day=${day.plusDays(+1)})}" class="btn btn-primary">다음</a>
       </div>
       <table border="1">
          <thead>
@@ -67,7 +68,7 @@
          </tbody>
       </table>
       <div>(수입+지출)합계 : <span th:text="${cashKindSum}"></span></div>
-      	<form method="post" action="/insertCashList">
+      	<form method="get" action="/insertCashList">
       		<button type="submit">입력</button>
       	</form>
    </div>

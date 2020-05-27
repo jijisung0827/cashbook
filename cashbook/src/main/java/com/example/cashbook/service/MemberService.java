@@ -1,10 +1,8 @@
 package com.example.cashbook.service;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.UUID;
 
-import javax.management.RuntimeErrorException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -50,7 +48,7 @@ public class MemberService {
 		System.out.println(member +"<---------------- MemberSeriver.addmember.member");
 		//int row = memberMapper.insertMember(member);
 		//2. 파일 저장
-		String path = "D:\\git-cashbook\\cashbook\\src\\main\\resources\\static\\upload\\";
+		String path = "D:\\sts-4.6.1.RELEASE\\maven.1590371256831\\cashbook\\src\\main\\resources\\static\\upload\\";
 		
 		//Exception
 		//1. 예외처리를 해야만 문법적으로 이상없는 예외
@@ -83,7 +81,7 @@ public class MemberService {
 		// 1. 멤버 이미지 파일 삭제
 		// 1_1 파일 이름 select member_pic from member
 		String memberPic = memberMapper.selectMemberPic(loginmember.getMemberId());
-		String path = "D:\\git-cashbook\\cashbook\\src\\main\\resources\\static\\upload\\";
+		String path = "D:\\sts-4.6.1.RELEASE\\maven.1590371256831\\cashbook\\src\\main\\resources\\static\\upload\\";
 		File file = new File(path+memberPic);
 		// 1_2 파일 삭제
 		
@@ -140,7 +138,7 @@ public class MemberService {
 		
 		//새로운 이름을 생성 : UUID
 		String memberPic = memberForm.getMemberId()+extension;
-		String path = "D:\\git-cashbook\\cashbook\\src\\main\\resources\\static\\upload\\";
+		String path = "D:\\sts-4.6.1.RELEASE\\maven.1590371256831\\cashbook\\src\\main\\resources\\static\\upload\\";
 		
 		Member member= new Member();
 		

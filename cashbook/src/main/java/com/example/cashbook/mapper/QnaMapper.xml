@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cashbook.mapper.QnaMapper"> 
+	
+	<!-- select Qna List -->
+	<select id="selectQnaList" parameterType="com.example.cashbook.vo.Qna" resultType="com.example.cashbook.vo.Qna">
+		SELECT
+			qna_no as qnaNo,
+			qna_title as qnaTitle,
+			qna_text as qnaText,
+			member_id as memberId,
+			qna_date as qnaDate
+		FROM qna
+		ORDER BY qna_no DESC
+	</select>
+	
+	<!-- select Qna One List  -->
+	<select id="selectQnaOne" parameterType="int" resultType="com.example.cashbook.vo.Qna">
+		SELECT
+			qna_no as qnaNo,
+			qna_title as qnaTitle,
+			qna_text as qnaText,
+			member_id as memberId,
+			qna_date as qnaDate
+		FROM qna
+		WHERE qna_no = #{qnaNo}
+	</select>
+	<!-- update Qna -->
+	<update id="updateQna" parameterType="com.example.cashbook.vo.Qna">
+		UPDATE qna
+   		SET 
+   			qna_title = #{qnaTitle},
+   			qna_text = #{qnaText},
+   			member_id = #{memberId},
+   			qna_date = NOW()
+   		WHERE qna_no = #{qnaNo}
+	</update>
+	
+	<!-- delete Qna -->
+	<delete id="deleteQna" parameterType="int">
+		DELETE
+		FROM qna
+		WHERE qna_no = #{qnaNo}
+	</delete>
+</mapper>

@@ -87,11 +87,13 @@ public class CashController {
 		int month = cDay.get(Calendar.MONTH)+1;
 		
 		List<DayAndPrice> list = cashService.getCashAndPriceList(memberId, year, month);
-		
-		for(DayAndPrice li : list) {
-			System.out.println(li+"<--------------------------------------List");
-		}
+		DayAndPrice priceSum = cashService.getCashApnPriceSum(memberId, month);
+		//System.out.println(priceSum.getPrice()+"<--------------------------------------DayAndPrice");
+		//for(DayAndPrice li : list) {
+		//	System.out.println(li+"<--------------------------------------List");
+		//}
 		//System.out.println(memberId+"<------------------memberId");
+		model.addAttribute("priceSum", priceSum);
 		model.addAttribute("list", list);
 		model.addAttribute("day", day);
 		model.addAttribute("cDay", cDay.get(Calendar.MONTH)+1); //월
@@ -163,6 +165,19 @@ public class CashController {
 		return "insertCashList";
 	}
 	
-	
-	
+	//일별 수입 지출 삽입 액션
+	@PostMapping("/insertCashList")
+	public String insertCashListAction(HttpSession session, Cash cash) {
+		
+		if(session.getAttribute("loginMember") == null){	
+			return "redirect:/";
+		}
+		
+		String memberId = ((LoginMember)session.getAttribute("loginMember")).getMemberId();
+		cash.setMemberId(memberId);
+		
+		cashService.insertCashList(cash);
+		
+		return "redirect:/cashList";
+	}
 }

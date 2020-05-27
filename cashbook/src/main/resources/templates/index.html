@@ -16,12 +16,23 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="container">
+<div class="container" align="center">
 	<h1>가계부</h1>
 	<div th:if="${session.loginMember == null}"><a href="/login" class="btn btn-primary">로그인</a></div>
 	<div th:if="${session.loginMember != null}"><a href="/logout" class="btn btn-primary">로그아웃</a></div>
-	
+	<br>
 	<div><a href="/addMember" class="btn btn-primary">회원가입</a></div>
+	<br>
+	<div>
+		로그인 , 로그아웃, 회원가입, 회원정보 CRUD
+	</div>
+	<div>
+		일별가계부 관리 CRUD , 월별 가계부 관리 C 합계 페이징
+	</div>
+	<div>
+		게시판 RUD , 게시판 상세보기 , 댓글 CRUD
+	</div>
 </div>
+	
 </body>
 </html>

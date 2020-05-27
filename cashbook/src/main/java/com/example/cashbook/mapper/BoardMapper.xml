@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.cashbook.mapper.BoardMapper"> 
+	<!-- 댓글보기 -->
+	<select id="selectBoardList" parameterType="com.example.cashbook.vo.Board" resultType="com.example.cashbook.vo.Board">
+		SELECT 
+			board_no as boardNo,
+			member_id as memberId,
+			board_text as boardText,
+			qna_no as qnaNo
+		FROM board
+		WHERE qna_no = #{qnaNo}
+	</select>
+	<!-- 댓글입력 -->
+	<insert id="insertBoard" parameterType="com.example.cashbook.vo.Board">
+		INSERT INTO board(
+			member_id,
+			board_text,
+			qna_no
+		)VALUES(
+			#{memberId},
+			#{boardText},
+			#{qnaNo}
+		)
+	</insert>
+	<!-- 한개의 댓글 보기 -->
+	<select id="selectBoardOne" parameterType="int" resultType="com.example.cashbook.vo.Board">
+		SELECT 
+			board_no as boardNo,
+			member_id as memberId,
+			board_text as boardText,
+			qna_no as qnaNo
+		FROM board
+		WHERE board_no = #{boardNo}
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateBoard" parameterType="com.example.cashbook.vo.Board">
+		UPDATE board
+   		SET member_id = #{memberId},
+   			board_text = #{boardText},
+   			qna_no = #{qnaNo}
+   		WHERE board_no = #{boardNo}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteBoard" parameterType="int">
+		DELETE
+   	FROM board
+   	WHERE board_no = #{boardNo}
+	</delete>
+</mapper>

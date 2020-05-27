@@ -54,6 +54,22 @@
    		GROUP BY DAY(cash_date)
    </select>
    
+   <!-- 월별 돈 합계 -->
+   
+   <select id="selectDayAndPriceSum" parameterType="java.util.Map" resultType="com.example.cashbook.vo.DayAndPrice">
+   	SELECT
+   		(SELECT
+   			IFNULL(SUM(cash_price), 0)
+   		FROM cash
+   		WHERE member_id = #{memberId} AND cash_kind = '수입' AND MONTH(cash_date) = #{month})
+   		-
+   		(SELECT
+   			IFNULL(SUM(cash_price), 0)
+   		FROM cash
+   		WHERE member_id = #{memberId} AND cash_kind = '지출' AND MONTH(cash_date) = #{month}) AS price
+   	FROM dual
+   </select>
+   
    <!-- 일별 가계부 수정 폼 -->
    <select id="selectCashListOne"
          parameterType="com.example.cashbook.vo.Cash"
@@ -89,4 +105,25 @@
 		   		category_name as categoryName
 		   FROM category
    </select>
+   
+   <!-- 일별 가계부 삽입 액션 -->
+   <insert id="insertCashList" parameterType="com.example.cashbook.vo.Cash">
+   		INSERT INTO cash(
+   			member_id,
+   			cash_date,
+   			cash_kind,
+   			category_name,
+   			cash_price,
+   			cash_place,
+   			cash_memo
+   		)VALUES(
+   			#{memberId},
+   			#{cashDate},
+   			#{cashKind},
+   			#{categoryName},
+   			#{cashPrice},
+   			#{cashPlace},
+   			#{cashMemo}
+   		)
+   </insert>
 </mapper>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style >
+	td.td-title{
+		height: 30px;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<div th:include="/include/menu::sidemenu"></div>
+	<div align="center">
+		<h1>게시판</h1>
+		<table border="1">
+         <thead>
+            <tr>
+               <td class="td-title">글번호</td>
+               <td class="td-title">글제목</td>
+               <td class="td-title">작성자</td>
+               <td class="td-title">작성날짜</td>
+            </tr>
+         </thead>
+         <tbody>
+         	<tr th:each="list, index:${list}">
+         		<td th:text="${list.qnaNo}" class="td-title"></td>
+         		<td class="td-title"><a th:href="@{/qnaListOne(qnaNo=${list.qnaNo})}" th:text="${list.qnaTitle}"></a></td>
+         		<td th:text="${list.memberId}" class="td-title"></td>
+         		<td th:text="${list.qnaDate}" class="td-title"></td>
+         	</tr>
+         </tbody>
+        </table>
+	</div>
+</body>
+</html>
