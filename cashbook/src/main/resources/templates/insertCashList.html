@@ -15,22 +15,69 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+	.sidenav {
+	height: 100%;
+	width: 200px;
+	text-align: center;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #00ff00;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.info {
+	margin: 30px;
+	font-size: 20px;
+}
+
+.menuItem {
+	margin-bottom: 40px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #111;
+	display: block;
+	border: none;
+	background-color: #00ff00;
+	cursor: pointer;
+	outline: none;
+}
+
+.menuItem:hover {
+	color: #f1f1f1;
+}
+
+.main {
+	margin-left: 350px;
+	text-align: center;
+	width: 800px;
+	margin-top: 300px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+}
+</style>
 <body>
-	<h1>가계부 추가</h1>
+	<h1 align="center">가계부 추가</h1><br>
 	<div th:include="/include/menu::sidemenu"></div>
    <!--<jsp:include page=""> -->
    <div align="center">
-   		<form method="post" action="/insertCashList">
+   		<form method="post" th:action="@{/insertCashList}">
    			<div>
    				<input type="date" name ="cashDate" id="cashDate">
-   			</div>
+   			</div><br>
    			<div>
 				category_name : 
 				<select name="categoryName" id = "categoryName">
 					<option value="">카테고리 선택</option>
 					<option th:each="i : ${category}" th:value="${i.categoryName}" th:text="${i.categoryName}"></option>
 				</select>
-			</div>
+			</div><br>
 			<div>
 				cash_kind :
 				<input type="radio" name="cashKind" id="cashKind" value="지출">지출
@@ -47,9 +94,9 @@
 			<div>
 				cash_memo :
 				<input type="text" name="cashMemo" id="cashMemo">
-			</div>
+			</div><br>
 			<div>
-				<button type="submit" id="btn">수정</button>
+				<button type="submit" id="btn" class="btn btn-primary">수정</button>
 			</div>
    		</form>
    </div>

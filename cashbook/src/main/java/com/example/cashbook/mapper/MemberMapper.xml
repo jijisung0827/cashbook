@@ -88,13 +88,20 @@
 	<!-- 회원정보 수정 -->
 	<update id="updateMemberInfo" parameterType="String">
 		UPDATE member
-		SET member_addr = #{memberAddr},
+		SET member_id = #{memberId},
+			member_addr = #{memberAddr},
 			member_phone = #{memberPhone},
-			member_email = #{memberEmail}
+			member_email = #{memberEmail},
+			member_pic = #{memberPic}
 		WHERE member_id = #{memberId}
 		AND member_pw = PASSWORD(#{memberPw})
 		AND member_name = #{memberName}
 	</update>
 	
-	
+	<!-- 관리자 아이디 -->
+	<select id="selectAdminId" parameterType="com.example.cashbook.vo.Admin" resultType="String">
+		SELECT admin_id
+		FROM admin
+		WHERE admin_id = #{adminId}
+	</select>
 </mapper>

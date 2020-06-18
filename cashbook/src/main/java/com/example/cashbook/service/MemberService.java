@@ -132,7 +132,7 @@ public class MemberService {
 		
 		MultipartFile mf = memberForm.getMemberPic();
 		String originName = mf.getOriginalFilename();
-		//System.out.println(originName + "<---------------- MemberSeriver.addmember.originName");
+		System.out.println(originName + "<---------------- MemberSeriver.addmember.originName");
 		int lastDot = originName.lastIndexOf(".");	//.을 찾는다
 		String extension = originName.substring(lastDot); //확장자명 구하기
 		
@@ -156,6 +156,11 @@ public class MemberService {
 		}
 		file = new File(path+memberPic);
 		
-		memberMapper.updateMemberInfo(memberForm);
+		memberMapper.updateMemberInfo(member);
+	}
+	
+	//관리자 계정 가져오기
+	public String selectAdminId(String adminId) {
+		return memberMapper.selectAdminId(adminId);
 	}
 }

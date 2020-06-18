@@ -29,18 +29,66 @@
 	});
 
 </script>
+<style>
+	.sidenav {
+	height: 100%;
+	width: 200px;
+	text-align: center;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #00ff00;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.info {
+	margin: 30px;
+	font-size: 20px;
+}
+
+.menuItem {
+	margin-bottom: 40px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #111;
+	display: block;
+	border: none;
+	background-color: #00ff00;
+	cursor: pointer;
+	outline: none;
+}
+
+.menuItem:hover {
+	color: #f1f1f1;
+}
+
+.main {
+	margin-left: 350px;
+	text-align: center;
+	width: 800px;
+	margin-top: 300px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+}
+</style>
 </head>
 <body>
-	<h1>회원 탈퇴</h1>
-	<form method="post" action="/removeMember" id = "deleteForm">  
-		<div>
+	<div th:include="/include/menu::sidemenu"></div>
+	<h1 align="center">회원 탈퇴</h1><br>
+	<form method="post" th:action="@{/removeMember}" id = "deleteForm">  
+		<div align="center">
 			비밀번호 : 
 			<input type="password" name = "memberPw" id="memberPw">
 			<span th:text="${msg}"></span>
 			<span id="pwHelper"></span>
-		</div>	
-		<div>
-			<button type="button" id="btn">회원 탈퇴</button>
+		</div><br>
+		<div align="center">
+			<button type="button" id="btn" class="btn btn-primary">회원 탈퇴</button>
 		</div>
 	</form>
 

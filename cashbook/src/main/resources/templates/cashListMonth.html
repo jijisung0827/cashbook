@@ -31,6 +31,62 @@
 	div.gd-down{
 		float: rigth;
 	}
+	.sidenav {
+	height: 100%;
+	width: 200px;
+	text-align: center;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #00ff00;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.info {
+	margin: 30px;
+	font-size: 20px;
+}
+
+.menuItem {
+	margin-bottom: 40px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #111;
+	display: block;
+	border: none;
+	background-color: #00ff00;
+	cursor: pointer;
+	outline: none;
+}
+
+.menuItem:hover {
+	color: #f1f1f1;
+}
+
+.main {
+	margin-left: 350px;
+	text-align: center;
+	width: 800px;
+	margin-top: 300px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+}
+#footer { 
+	position: fixed; 
+	bottom: 130px; 
+	width: 900px; 
+}
+#footer1{
+	position: fixed; 
+	bottom: 130px; 
+	width: 900px;
+	margin-left: 800px;
+}
 </style>
 
 <!-- Latest compiled and minified CSS -->
@@ -48,15 +104,14 @@
 <body>
 <div th:include="/include/menu::sidemenu"></div>
 <div class="container">
-	<h1>월별 가계부 관리</h1>
+	<h1 align="center">월별 가계부 관리</h1>
 	
 	<h3 th:text="${cDay}+월"></h3>
-	<h3 th:if="${priceSum.price} >0" th:text="'합계 : +'+${priceSum.price}"></h3>
-	<h3 th:unless="${priceSum.price} >0" th:text="'합계 : '+${priceSum.price}"></h3>
-	<div>
-         <a th:href="@{/cashListMonth(day=${day.plusMonths(-1)})}" class="btn btn-primary">이전</a>
-         <a th:href="@{/cashListMonth(day=${day.plusMonths(+1)})}" class="btn btn-primary">다음</a>
-    </div>
+	<div id="footer1">
+   		<h3 th:if="${priceSum.price} >0" th:text="'합계 : +'+${priceSum.price}"></h3>
+		<h3 th:unless="${priceSum.price} >0" th:text="'합계 : '+${priceSum.price}"></h3>
+	</div>
+	
 	<div class="gd-left gd-clear gd-title">일</div>
 	<div class="gd-left gd-title">월</div>
 	<div class="gd-left gd-title">화</div>
@@ -81,6 +136,12 @@
 			 	</span>
 			 	</div>
 			 </div>
+			 <div id="footer">
+         		<a th:href="@{/cashListMonth(day=${day.plusMonths(-1)})}" class="btn btn-primary">이전</a>
+         		<a th:href="@{/cashListMonth(day=${day.plusMonths(+1)})}" class="btn btn-primary">다음</a>
+    		</div>
+    		
 </div>
+	
 </body>
 </html>

@@ -15,10 +15,62 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+	.sidenav {
+	height: 100%;
+	width: 200px;
+	text-align: center;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #00ff00;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.info {
+	margin: 30px;
+	font-size: 20px;
+}
+
+.menuItem {
+	margin-bottom: 40px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #111;
+	display: block;
+	border: none;
+	background-color: #00ff00;
+	cursor: pointer;
+	outline: none;
+}
+
+.menuItem:hover {
+	color: #f1f1f1;
+}
+
+.main {
+	margin-left: 350px;
+	text-align: center;
+	width: 800px;
+	margin-top: 300px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+}
+.box{
+	width: 200px;
+	height: 50px;
+	align-content: center;
+}
+</style>
 <body>
 	<div th:include="/include/menu::sidemenu"></div>
 		<div align="center">
-			<h1>게시판 상세보기</h1>
+			<h1>게시판 상세보기</h1><br>
 			<div>
 				<input type="text" th:value="${qna.qnaTitle}" name = "qnaTitle" style="text-align: center; width:620px" readonly>
 			</div>
@@ -34,25 +86,24 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<a th:href="@{/qnaUpdate(qnaNo=${qna.qnaNo})}" class="btn btn-primary">수정</a>
 				<a th:href="@{/qnaDelete(qnaNo=${qna.qnaNo})}" class="btn btn-primary">삭제</a>
-			</div>
+			</div><br>
 			<div th:unless="${qna.memberId} eq (${memberLogin}) or ${qna.memberId} eq('admin')">
 				<a th:href="@{/qnaList}" class="btn btn-primary">목록</a>
-			</div>
+			</div><br>
 			<div>
 				<form method="post" action="/insertBoard">
 					<input type="hidden" th:value="${qna.qnaNo}" name="qnaNo">
 					<input type="text" name="boardText"><button type="submit">댓글입력</button>
 				</form>
-			</div>
+			</div><br>
 			<table border="1">
 				<tr th:each="board, index:${board}">
-					<th th:text="${board.memberId}" class="main" width="50"></th><td th:text="${board.boardText}" class="main" width="300"></td>
-					<td th:if="${board.memberId} eq (${memberLogin}) or ${qna.memberId} eq ('admin')">
+					<th th:text="${board.memberId}" class = "box" align="center"></th><td th:text="${board.boardText}" class = "box" align="center"></td>
+					<td th:if="${board.memberId} eq (${memberLogin}) or ${qna.memberId} eq ('admin')" class = "box" align="center">
 						<a th:href="@{/updateBoard(boardNo=${board.boardNo})}" class="btn btn-primary">수정</a>
-					&nbsp;&nbsp;&nbsp;
 					<a th:href="@{/deleteBoard(boardNo=${board.boardNo},qnaNo=${qna.qnaNo})}" class="btn btn-primary">삭제</a>
 					</td>
-					<td th:unless="${board.memberId} eq (${memberLogin}) or ${qna.memberId} eq ('admin')">
+					<td th:unless="${board.memberId} eq (${memberLogin}) or ${qna.memberId} eq ('admin')" class = "box" align="center">
 					</td>	
 				</tr>
 			</table>

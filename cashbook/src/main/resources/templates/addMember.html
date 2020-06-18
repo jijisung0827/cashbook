@@ -74,7 +74,7 @@ let helperInit = function(){
 <body>
 <div class="container">
 	<h1>회원가입</h1>
-	<form id="idForm" method="post" action="/checkMemberId" enctype="application/x-www-form-urlencoded"> <!-- 글자형태 -->
+	<form id="idForm" method="post" th:action="@{/checkMemberId}" enctype="application/x-www-form-urlencoded"> <!-- 글자형태 -->
 		<div>
 			아이디 중복 확인 :
 			<input type="text" name = "memberIdCheck" id = "memberIdCheck"> 
@@ -83,7 +83,7 @@ let helperInit = function(){
 			<span th:text="${msg}"></span>
 		</div>
 	</form>
-	<form method="post" action="/addMember" id="myform" enctype="multipart/form-data">  <!-- 이미지.바이트 형태 -->
+	<form method="post" th:action="@{/addMember}" id="myform" enctype="multipart/form-data">  <!-- 이미지.바이트 형태 -->
 		<div>
 			사진 : 
 			<input type="file" name="memberPic" id="memberPic">

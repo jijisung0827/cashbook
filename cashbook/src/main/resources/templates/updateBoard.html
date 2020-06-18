@@ -15,20 +15,67 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+	.sidenav {
+	height: 100%;
+	width: 200px;
+	text-align: center;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #00ff00;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.info {
+	margin: 30px;
+	font-size: 20px;
+}
+
+.menuItem {
+	margin-bottom: 40px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #111;
+	display: block;
+	border: none;
+	background-color: #00ff00;
+	cursor: pointer;
+	outline: none;
+}
+
+.menuItem:hover {
+	color: #f1f1f1;
+}
+
+.main {
+	margin-left: 350px;
+	text-align: center;
+	width: 800px;
+	margin-top: 300px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+}
+</style>
 <body>
 	<div th:include="/include/menu::sidemenu"></div>
-		<form method="post" action="/updateBoard">
+		<form method="post" th:action="@{/updateBoard}">
 			<div align="center">
-				<h1>게시판 댓글 수정</h1>
+				<h1>게시판 댓글 수정</h1><br>
 				<div>
 					댓글 수정 : 
 					<input type="text" th:value="${board.boardText}" name="boardText">
-				</div>
+				</div><br>
 					<input type="hidden" th:value="${board.memberId}" name="memberId">
 					<input type="hidden" th:value="${board.qnaNo}"	name="qnaNo">
 					<input type="hidden" th:value="${board.boardNo}" name="boardNo">
 				<div>
-					<button type="submit">수정</button>
+					<button type="submit" class="btn btn-primary">수정</button>
 				</div>
 			</div>
 		</form>

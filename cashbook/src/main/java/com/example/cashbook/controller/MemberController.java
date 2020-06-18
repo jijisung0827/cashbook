@@ -1,3 +1,4 @@
+
 package com.example.cashbook.controller;
 
 import javax.servlet.http.HttpSession;
@@ -8,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.cashbook.service.MemberService;
 import com.example.cashbook.vo.LoginMember;
@@ -56,7 +58,7 @@ public class MemberController {
 	}
 	//login action
 	@PostMapping("/login")
-	public String LoginMember(Model model,LoginMember loginMember, HttpSession session) {
+	public String LoginMember(Model model,LoginMember loginMember, HttpSession session, @RequestParam("memberId") String memberId) {
 		LoginMember returnLoginMember = memberService.login(loginMember);
 		if(returnLoginMember == null) { //로그인 실패시
 			model.addAttribute("msg", "아이디와 비밀번호를 확인하세요");
@@ -194,10 +196,11 @@ public class MemberController {
 	// modifyMember 회원 수정 action
 	@PostMapping("/modifyMember")
 	public String updateMemberInfoAction(HttpSession session, MemberForm memberForm) {
-		//if(session.getAttribute("loginMember") != null){	
-		//	return "redirect:/";
-		//}
+		if(session.getAttribute("loginMember") == null){	
+			return "redirect:/";
+		}
 		// 파일 .jpg .png .gif 만 업로드 가능
+		System.out.println(memberForm.getMemberPic()+"<---------------------------memberController");
 		if(memberForm.getMemberPic() != null) {
 			if(!memberForm.getMemberPic().getContentType().equals("image/jpg") && !memberForm.getMemberPic().getContentType().equals("image/png") && !memberForm.getMemberPic().getContentType().equals("image/gif") && !memberForm.getMemberPic().getContentType().equals("image/jpeg")) {
 				return "redirect:/modifyMember";
@@ -207,6 +210,13 @@ public class MemberController {
 		memberService.updateMember(memberForm);
 		System.out.println(memberForm+"<--------------------------- modifyMemberInfo Action");
 		return "redirect:/memberInfo";
+	}
+	
+	//관리자 계정
+	@GetMapping("/adminHome")
+	public String selectAdminHome() {
+		
+		return "adminHome";
 	}
 }
 

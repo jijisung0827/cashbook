@@ -16,18 +16,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<div th:fragment="sidemenu">
-		<div class="sidenav">
-			<div class="info">
-			<span th:text="${session.loginMember.memberId}"></span>님<br>
-			</div>
-			<a th:href="@{/home}" class="menuItem">홈</a>
-			<a th:href="@{/memberInfo}" class="menuItem">회원정보</a>
-			<a th:href="@{/cashList}" class="menuItem">일별 가계부 관리</a>
-			<a th:href="@{/cashListMonth}" class="menuItem">월별 가계부 관리</a>
-			<a th:href="@{/qnaList}" class="menuItem">게시판</a>
-			<a th:href="@{/logout}" class="menuItem">로그아웃</a>
-		</div>
-	</div>
+	<h1>admin Home</h1>
+	<div th:include="/include/menu::sidemenu"></div>
+	
 </body>
 </html>

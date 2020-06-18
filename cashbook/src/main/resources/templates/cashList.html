@@ -19,58 +19,111 @@
 <script
    src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+	.sidenav {
+	height: 100%;
+	width: 200px;
+	text-align: center;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #00ff00;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.info {
+	margin: 30px;
+	font-size: 20px;
+}
+
+.menuItem {
+	margin-bottom: 40px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #111;
+	display: block;
+	border: none;
+	background-color: #00ff00;
+	cursor: pointer;
+	outline: none;
+}
+
+.menuItem:hover {
+	color: #f1f1f1;
+}
+
+.main {
+	margin-left: 350px;
+	text-align: center;
+	width: 800px;
+	margin-top: 300px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+}
+td.box{
+	width: 100px;
+	height: 50px;
+	align-content: center;
+}
+</style>
 <body>
 	
    <!-- /include폴더안에 있는 menu 파일 중에  th:fragment="sidemenu"인 div단위 내용 가져옴  -->
    <div th:include="/include/menu::sidemenu"></div>
    <!--<jsp:include page=""> -->
    <div align="center">
-   	<h1>일별 가계부 관리</h1>
-      <h1>2020년 가계부</h1>
-      <h2 th:text="${day}"></h2>
+   	<h1>일별 가계부 관리</h1><br>
+      <h1>2020년 가계부</h1><br>
+      <h2 th:text="${day}"></h2><br>
+      
+      <table border="1">
+         <thead>
+            <tr>
+               <td class = "box" >&nbsp;</td>
+               <td class = "box" align="center">카테고리</td>
+               <td class = "box" align="center">수입</td>
+               <td class = "box" align="center">지출</td>
+               <td class = "box" align="center">장소</td>
+               <td class = "box" align="center">메모</td>
+               <td class = "box" align="center">삭제</td>
+               <td class = "box" align="center">수정</td>
+            </tr>
+         </thead>
+         <tbody>
+            <tr th:each="cash, index:${cashList}" class = "box">
+               <td align="center" class = "box" th:text="${index.index}+1"></td>
+               <td align="center" class = "box" th:text="${cash.categoryName}"></td>
+
+               <!-- 타임리프 if~else문 : if/unless -->
+               <td align="center" class = "box" th:if="${cash.cashKind} == '수입'"
+                  th:text="${'+'+ cash.cashPrice}"></td>
+               <td align="center" class = "box" th:unless="${cash.cashKind} == '수입'"></td>
+				
+               <!-- 타임리프 if~else문 : if/unless  -->
+               <td align="center" class = "box" th:if="${cash.cashKind} =='지출'"
+                  th:text="${'-'+ cash.cashPrice}"></td>
+               <td align="center" class = "box" th:unless="${cash.cashKind} == '지출'"></td>
+
+               <td align="center" class = "box" th:text="${cash.cashPlace}"></td>
+               <td align="center" class = "box" th:text="${cash.cashMemo}"></td>
+               <td align="center" class = "box"><a th:href="@{/deleteCash(cashNo=${cash.cashNo})}">삭제</a></td>
+               <td align="center" class = "box"><a th:href="@{/updateCash(cashNo=${cash.cashNo},date=${day.toString()})}">수정</a></td>
+            </tr>
+         </tbody>
+      </table><br>
+      <div>(수입+지출)합계 : <span th:text="${cashKindSum}"></span></div><br>
+      	<form method="get" th:action="@{/insertCashList}">
+      		<button type="submit" class="btn btn-primary">입력</button>
+      	</form><br>
       <div>
          <a th:href="@{/cashList(day=${day.plusDays(-1)})}" class="btn btn-primary">이전</a>
          <a th:href="@{/cashList(day=${day.plusDays(+1)})}" class="btn btn-primary">다음</a>
       </div>
-      <table border="1">
-         <thead>
-            <tr>
-               <td>&nbsp;</td>
-               <td>카테고리</td>
-               <td>수입</td>
-               <td>지출</td>
-               <td>장소</td>
-               <td>메모</td>
-               <td>삭제</td>
-               <td>수정</td>
-            </tr>
-         </thead>
-         <tbody>
-            <tr th:each="cash, index:${cashList}">
-               <td th:text="${index.index}+1"></td>
-               <td th:text="${cash.categoryName}"></td>
-
-               <!-- 타임리프 if~else문 : if/unless -->
-               <td th:if="${cash.cashKind} == '수입'"
-                  th:text="${'+'+ cash.cashPrice}"></td>
-               <td th:unless="${cash.cashKind} == '수입'"></td>
-				
-               <!-- 타임리프 if~else문 : if/unless  -->
-               <td th:if="${cash.cashKind} =='지출'"
-                  th:text="${'-'+ cash.cashPrice}"></td>
-               <td th:unless="${cash.cashKind} == '지출'"></td>
-
-               <td th:text="${cash.cashPlace}"></td>
-               <td th:text="${cash.cashMemo}"></td>
-               <td><a th:href="@{/deleteCash(cashNo=${cash.cashNo})}">삭제</a></td>
-               <td><a th:href="@{/updateCash(cashNo=${cash.cashNo},date=${day.toString()})}">수정</a></td>
-            </tr>
-         </tbody>
-      </table>
-      <div>(수입+지출)합계 : <span th:text="${cashKindSum}"></span></div>
-      	<form method="get" action="/insertCashList">
-      		<button type="submit">입력</button>
-      	</form>
    </div>
 </body>
 </html>

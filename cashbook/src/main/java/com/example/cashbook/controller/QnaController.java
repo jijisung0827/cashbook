@@ -90,7 +90,7 @@ public class QnaController {
 		}
 		qnaService.updateQna(qna);
 		
-		return "redirect:/qnaList";
+		return "redirect:/qnaListOne?qnaNo="+qna.getQnaNo();
 	}
 	
 	//board insert

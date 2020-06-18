@@ -14,6 +14,62 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<style>
+	.sidenav {
+	height: 100%;
+	width: 200px;
+	text-align: center;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #00ff00;
+	overflow-x: hidden;
+	padding-top: 20px;
+}
+
+.info {
+	margin: 30px;
+	font-size: 20px;
+}
+
+.menuItem {
+	margin-bottom: 40px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #111;
+	display: block;
+	border: none;
+	background-color: #00ff00;
+	cursor: pointer;
+	outline: none;
+}
+
+.menuItem:hover {
+	color: #f1f1f1;
+}
+
+.main {
+	margin-left: 350px;
+	text-align: center;
+	width: 800px;
+	margin-top: 300px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {padding-top: 15px;}
+	.sidenav a {font-size: 18px;}
+}
+.div-type {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+.table-type{
+  border-collapse: collapse;
+  width: 100%;
+}
+</style>
 <script>
 	$(document).ready(function(){
 		$('#btn').click(function(){
@@ -29,45 +85,44 @@
 </head>
 <body>
 	<div class="container">
-	<h1>회원 정보수정</h1>
+	<h1 align="center">회원 정보수정</h1>
 	<div th:include="/include/menu::sidemenu"></div> 
-		<form method="post" action="/modifyMember" enctype="multipart/form-data" id="myform">
-			<div>
-				사진 : 
+		<form method="post" th:action="@{/modifyMember}" enctype="multipart/form-data" id="myform">
+			<div align="center">
 				<img th:src="@{'/upload/'+ ${member.memberPic}}" width="200" height="200"></img>
 				<input type="file" name="memberPic" id="memberPic">	
 			</div>
-			<div>
+			<div class="div-type">
 	  			아이디 : 
 				<input type="text" name = "memberId" th:value="${member.memberId}" readonly>
 			</div>
-			<div>
+			<div class="div-type">
 				사용자 이름 : 
 				<input type="text" name = "memberName" id = "memberName" th:value="${member.memberName}" readonly>
-			</div>
-			<div>
+			</div >
+			<div class="div-type">
 				주소 : 
 				<input type="text" name = "memberAddr" id = "memberAddr" th:value="${member.memberAddr}">
 			</div>
-			<div>
+			<div class="div-type">
 				전화번호 : 
 				<input type="text" name = "memberPhone" id = "memberPhone" th:value="${member.memberPhone}">
 			</div>
-			<div>
+			<div class="div-type">
 				이메일 : 
 				<input type="text" name = "memberEmail" id = "memberEmail" th:value="${member.memberEmail}">
 			</div>
-			<div>
+			<div class="div-type">
 				비밀번호 : 
 				<input type="password" name = "memberPw" id = "memberPw">
 				<span id="pwHelper"></span>
 			</div>
-			<div>
+			<div class="div-type">
 				비밀번호 확인 : 
 				<input type="password" id = "memberPw2">
 			</div>
 			<div>
-				<button type="button" id="btn">수정</button>
+				<button type="button" id="btn" class="btn btn-primary">수정</button>
 			</div>
 		</form>
 	</div>

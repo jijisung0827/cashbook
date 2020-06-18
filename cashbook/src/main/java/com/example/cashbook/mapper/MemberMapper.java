@@ -16,5 +16,7 @@ public interface MemberMapper {
 	public String findMemberId(Member member);
 	public int updateMemberPw(Member member);
 	public String selectMemberPic(String memberId);
-	public void updateMemberInfo(MemberForm memberform);
+	public void updateMemberInfo(Member member);
+	//admin
+	public String selectAdminId(String adminId);
 }

@@ -18,8 +18,8 @@
 <body>
 <div class="container" align="center">
 	<h1>가계부</h1>
-	<div th:if="${session.loginMember == null}"><a href="/login" class="btn btn-primary">로그인</a></div>
-	<div th:if="${session.loginMember != null}"><a href="/logout" class="btn btn-primary">로그아웃</a></div>
+	<div th:if="${session.loginMember == null}"><a th:href="@{/login}" class="btn btn-primary">로그인</a></div>
+	<div th:if="${session.loginMember != null}"><a th:href="@{/logout}" class="btn btn-primary">로그아웃</a></div>
 	<br>
 	<div><a href="/addMember" class="btn btn-primary">회원가입</a></div>
 	<br>
