@@ -15,13 +15,21 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+	.div-all{
+		margin-top: 300px;
+	}
+	.a-side{
+		width: 50;
+	}
+</style>
 <body>
-<div class="container" align="center">
-	<h1>가계부</h1>
-	<div th:if="${session.loginMember == null}"><a th:href="@{/login}" class="btn btn-primary">로그인</a></div>
-	<div th:if="${session.loginMember != null}"><a th:href="@{/logout}" class="btn btn-primary">로그아웃</a></div>
+<div class="container div-all" align="center">
+	<h1>가계부</h1><br>
+	<div th:if="${session.loginMember == null}"><a style="width:150px;" th:href="@{/login}" class="btn btn-primary">로그인</a></div>
+	<div th:if="${session.loginMember != null}"><a style="width:150px;" th:href="@{/logout}" class="btn btn-primary">로그아웃</a></div>
 	<br>
-	<div><a href="/addMember" class="btn btn-primary">회원가입</a></div>
+	<div><a style="width:150px;" th:href="@{/addMember}" class="btn btn-primary">회원가입</a></div>
 	<br>
 	<div>
 		로그인 , 로그아웃, 회원가입, 회원정보 CRUD

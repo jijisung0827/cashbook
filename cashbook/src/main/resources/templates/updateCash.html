@@ -61,21 +61,24 @@
 	.sidenav {padding-top: 15px;}
 	.sidenav a {font-size: 18px;}
 }
+.div-all{
+	margin-top: 100px;
+}
 </style>
 <body>
-	<div class="container">
-	<h1>가계부 정보수정</h1>
+	<div class="container div-all" align="center">
+	<h1>가계부 정보수정</h1><br>
 	<div th:include="/include/menu::sidemenu"></div>
 		<form method="post" th:action="@{/updateCash}" id="myform">
 			<div>
 				member_id :
 				<input type="text" name="memberId" id="memberId" th:value="${memberId}">
-			</div>
+			</div><br>
 			<div>
 				cash_kind :
 				<input type="radio" name="cashKind" id="cashKind" th:value="${cash.cashKind}">지출
 				<input type="radio" name="cashKind" id="cashKind" th:value="${cash.cashKind}">수입
-			</div>
+			</div><br>
 			<div>
 				category_name : 
 				<select name="categoryName" id = "categoryName">
@@ -98,10 +101,10 @@
 			<div>
 				cash_memo :
 				<input type="text" name="cashMemo" id="cashMemo" th:value="${cash.cashMemo}">
-			</div>
+			</div><br>
 				<input type="hidden" name="cashNo" id="cashNo" th:value="${cash.cashNo}">
 			<div>
-				<button type="submit" id="btn">수정</button>
+				<button type="submit" id="btn" class="btn btn-primary">수정</button>
 			</div>
 		</form>
 	</div>

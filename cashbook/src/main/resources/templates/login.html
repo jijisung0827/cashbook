@@ -38,30 +38,35 @@
 		});
 	});
 </script>
+<style>
+	.div-all{
+		margin-top: 300px;
+	}
+</style>
 </head>
 <body>
-	<div align="center">
-		<h1>로그인</h1>
+	<div align="center" class="div-all">
+		<h1>로그인</h1><br>
 		<form method="post" th:action="@{/login}" id="loginForm">
 			<div>
 				member_id : 
 				<input type="text" id="memberId" name="memberId">
 				<span id="idHelper"></span>
-			</div>
+			</div><br>
 			<div>
 				member_pw : 
 				<input type="password" id="memberPw" name="memberPw">
 				<span id="pwHelper"></span>
-			</div>
+			</div><br>
 			<div>
 				<span th:text="${msg}"></span>
 			</div>
 			<div>
-				<a th:href="@{/findMemberId}">아이디가 기억나지 않아요.</a> <!-- 이름, 메일 ,전화번호 : 아이디-->
+				<a th:href="@{/findMemberId}">아이디가 기억나지 않아요.</a> <!-- 이름, 메일 ,전화번호 : 아이디--><br><br>
 				<a th:href="@{/findMemberPw}">비밀번호가 기억나지 않아요.</a> <!-- 아이디,이메일 : 이메일을통해 새로운 비밀번호 보내준다 -->
-			</div>
+			</div><br>
 			<div>
-				<button type="button" id="btn" class="btn btn-primary">로그인</button>
+				<button type="button" id="btn" class="btn btn-primary" style="width:150px;">로그인</button>
 			</div>
 		</form>
 	</div>

@@ -23,9 +23,15 @@ $(document).ready(function(){
 });
 
 </script>
+<style>
+	.div-all{
+		margin-top: 300px;
+	}
+</style>
 </head>
 <body>
-	<h1>아이디 찾기</h1>
+	<div align="center" class="div-all">
+	<h1>아이디 찾기</h1><br>
 	<form method="post" th:action="@{/findMemberId}" id="myform">
 		<div>
 			member_name : 
@@ -38,10 +44,11 @@ $(document).ready(function(){
 		<div>
 			member_email : 
 			<input type="text" id = "memberEmail" name = "memberEmail">
-		</div>
+		</div><br>
 		<div>
-			<button type="button" id="btn">찾기</button>
+			<button type="button" id="btn" style="width:150px;" class="btn btn-primary">찾기</button>
 		</div>
 	</form>
+	</div>
 </body>
 </html>

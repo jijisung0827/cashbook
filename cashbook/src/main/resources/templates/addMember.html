@@ -15,6 +15,11 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 </head>
+<style>
+	.div-all{
+		margin-top: 100px;
+	}
+</style>
 <script>
 let helperInit = function(){
 	$('#idHelper').text("");
@@ -72,8 +77,12 @@ let helperInit = function(){
 	});
 </script>
 <body>
-<div class="container">
-	<h1>회원가입</h1>
+<div class="container div-all">
+	
+	<div class="row">
+	<div class="col"></div>
+	<div class="col">
+	<h1 >회원가입</h1><br>
 	<form id="idForm" method="post" th:action="@{/checkMemberId}" enctype="application/x-www-form-urlencoded"> <!-- 글자형태 -->
 		<div>
 			아이디 중복 확인 :
@@ -121,11 +130,14 @@ let helperInit = function(){
 			이메일 : 
 			<input type="text" name = "memberEmail" id = "memberEmail">
 			<span id="emailHelper"></span>
-		</div>
+		</div><br>
 		<div>
-			<button type="button" id="btn">회원가입</button>
+			<button type="button" id="btn" style="width:150px;" class="btn btn-primary">회원가입</button>
 		</div>
 	</form>
+	</div>
+	<div class="col"></div>
+	</div>
 </div>
 </body>
 </html>
